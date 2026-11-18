@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: devops-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/dianahnatiuk/devops-gitops.git
+    targetRevision: main
+    path: charts/devops-app
+    helm:
+      valueFiles:
+        - values-minikube.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: devops-app
+  syncPolicy:
+    automated:
+      prune: true # selfHeal додамо в п. 6
+    syncOptions:
+      - CreateNamespace=true

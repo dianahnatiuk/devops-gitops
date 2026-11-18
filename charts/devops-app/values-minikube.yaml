@@ -1,0 +1,25 @@
+# Значення для кластера minikube під керуванням Argo CD
+replicaCount: 2
+
+image:
+  repository: ghcr.io/dianahnatiuk/devops-lab
+  tag: "1.0.0"
+  pullPolicy: IfNotPresent
+
+# Secret створюється вручну (kubectl create secret), у Git паролів немає
+existingSecret: devops-app-secret
+
+service:
+  type: ClusterIP
+  nodePort: ""
+
+config:
+  appEnv: "minikube"
+  appGreeting: "Hello from Argo CD (GitOps)!"
+
+ingress:
+  enabled: false
+
+hooks:
+  preUpgrade:
+    enabled: true
