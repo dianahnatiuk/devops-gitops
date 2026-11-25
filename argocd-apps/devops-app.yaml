@@ -18,5 +18,6 @@ spec:
   syncPolicy:
     automated:
       prune: true # selfHeal додамо в п. 6
+selfHeal: true
     syncOptions:
       - CreateNamespace=true
